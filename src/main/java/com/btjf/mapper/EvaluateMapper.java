@@ -93,4 +93,8 @@ public interface EvaluateMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Evaluate record);
+
+    Double averageScore(@Param("staffID") String staffID);
+
+    Double averageTime(@Param("staffID") String staffID);
 }

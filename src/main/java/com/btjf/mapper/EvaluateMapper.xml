@@ -10,7 +10,7 @@
     <result column="FDeptID" jdbcType="INTEGER" property="deptID" />
     <result column="FDeptName" jdbcType="VARCHAR" property="deptName" />
     <result column="FWindowNo" jdbcType="INTEGER" property="windowNo" />
-    <result column="FStaffID" jdbcType="INTEGER" property="staffID" />
+    <result column="FStaffID" jdbcType="VARCHAR" property="staffID" />
     <result column="FStaffName" jdbcType="VARCHAR" property="staffName" />
     <result column="FCustName" jdbcType="VARCHAR" property="custName" />
     <result column="FCustMobile" jdbcType="VARCHAR" property="custMobile" />
@@ -160,7 +160,7 @@
       FDuration, FQuestion, FAnswer, 
       FEvaluate)
     values (#{deptID,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{windowNo,jdbcType=INTEGER}, 
-      #{staffID,jdbcType=INTEGER}, #{staffName,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{staffID,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
       #{custMobile,jdbcType=VARCHAR}, #{itemID,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=DATE}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{duration,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=INTEGER}, 
@@ -236,7 +236,7 @@
         #{windowNo,jdbcType=INTEGER},
       </if>
       <if test="staffID != null">
-        #{staffID,jdbcType=INTEGER},
+        #{staffID,jdbcType=VARCHAR},
       </if>
       <if test="staffName != null">
         #{staffName,jdbcType=VARCHAR},
@@ -286,6 +286,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbg.generated
@@ -306,7 +307,7 @@
         FWindowNo = #{record.windowNo,jdbcType=INTEGER},
       </if>
       <if test="record.staffID != null">
-        FStaffID = #{record.staffID,jdbcType=INTEGER},
+        FStaffID = #{record.staffID,jdbcType=VARCHAR},
       </if>
       <if test="record.staffName != null">
         FStaffName = #{record.staffName,jdbcType=VARCHAR},
@@ -359,7 +360,7 @@
       FDeptID = #{record.deptID,jdbcType=INTEGER},
       FDeptName = #{record.deptName,jdbcType=VARCHAR},
       FWindowNo = #{record.windowNo,jdbcType=INTEGER},
-      FStaffID = #{record.staffID,jdbcType=INTEGER},
+      FStaffID = #{record.staffID,jdbcType=VARCHAR},
       FStaffName = #{record.staffName,jdbcType=VARCHAR},
       FCustName = #{record.custName,jdbcType=VARCHAR},
       FCustMobile = #{record.custMobile,jdbcType=VARCHAR},
@@ -393,7 +394,7 @@
         FWindowNo = #{windowNo,jdbcType=INTEGER},
       </if>
       <if test="staffID != null">
-        FStaffID = #{staffID,jdbcType=INTEGER},
+        FStaffID = #{staffID,jdbcType=VARCHAR},
       </if>
       <if test="staffName != null">
         FStaffName = #{staffName,jdbcType=VARCHAR},
@@ -443,7 +444,7 @@
     set FDeptID = #{deptID,jdbcType=INTEGER},
       FDeptName = #{deptName,jdbcType=VARCHAR},
       FWindowNo = #{windowNo,jdbcType=INTEGER},
-      FStaffID = #{staffID,jdbcType=INTEGER},
+      FStaffID = #{staffID,jdbcType=VARCHAR},
       FStaffName = #{staffName,jdbcType=VARCHAR},
       FCustName = #{custName,jdbcType=VARCHAR},
       FCustMobile = #{custMobile,jdbcType=VARCHAR},
@@ -458,4 +459,24 @@
       FEvaluate = #{evaluate,jdbcType=INTEGER}
     where FID = #{ID,jdbcType=INTEGER}
   </update>
+
+
+  <select id="averageScore" resultType="java.lang.Double" parameterType="map">
+    select round(AVG(a.FEvaluate),2)  from
+    (select * from t_evaluate
+    where FStaffID = #{staffID,jdbcType=VARCHAR}
+    and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= FCreateDate
+    and FEvaluate is not null
+    ) a
+  </select>
+
+  <select id="averageTime" resultType="java.lang.Double" parameterType="map">
+  select round(AVG(a.FDuration),2)  from
+    (select * from t_evaluate
+    where FStaffID = #{staffID,jdbcType=VARCHAR}
+    and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= FCreateDate
+    and FEvaluate is not null
+    ) a
+  </select>
+
 </mapper>

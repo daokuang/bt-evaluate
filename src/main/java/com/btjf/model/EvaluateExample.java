@@ -482,52 +482,62 @@ public class EvaluateExample {
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDEqualTo(Integer value) {
+        public Criteria andStaffIDEqualTo(String value) {
             addCriterion("FStaffID =", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDNotEqualTo(Integer value) {
+        public Criteria andStaffIDNotEqualTo(String value) {
             addCriterion("FStaffID <>", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDGreaterThan(Integer value) {
+        public Criteria andStaffIDGreaterThan(String value) {
             addCriterion("FStaffID >", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStaffIDGreaterThanOrEqualTo(String value) {
             addCriterion("FStaffID >=", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDLessThan(Integer value) {
+        public Criteria andStaffIDLessThan(String value) {
             addCriterion("FStaffID <", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDLessThanOrEqualTo(Integer value) {
+        public Criteria andStaffIDLessThanOrEqualTo(String value) {
             addCriterion("FStaffID <=", value, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDIn(List<Integer> values) {
+        public Criteria andStaffIDLike(String value) {
+            addCriterion("FStaffID like", value, "staffID");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffIDNotLike(String value) {
+            addCriterion("FStaffID not like", value, "staffID");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffIDIn(List<String> values) {
             addCriterion("FStaffID in", values, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDNotIn(List<Integer> values) {
+        public Criteria andStaffIDNotIn(List<String> values) {
             addCriterion("FStaffID not in", values, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDBetween(Integer value1, Integer value2) {
+        public Criteria andStaffIDBetween(String value1, String value2) {
             addCriterion("FStaffID between", value1, value2, "staffID");
             return (Criteria) this;
         }
 
-        public Criteria andStaffIDNotBetween(Integer value1, Integer value2) {
+        public Criteria andStaffIDNotBetween(String value1, String value2) {
             addCriterion("FStaffID not between", value1, value2, "staffID");
             return (Criteria) this;
         }
@@ -1304,6 +1314,11 @@ public class EvaluateExample {
 
         public Criteria andDeptNameLikeInsensitive(String value) {
             addCriterion("upper(FDeptName) like", value.toUpperCase(), "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andStaffIDLikeInsensitive(String value) {
+            addCriterion("upper(FStaffID) like", value.toUpperCase(), "staffID");
             return (Criteria) this;
         }
 

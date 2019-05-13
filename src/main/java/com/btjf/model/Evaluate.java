@@ -47,7 +47,7 @@ public class Evaluate implements Serializable {
      *
      * @mbg.generated
      */
-    private Integer staffID;
+    private String staffID;
 
     /**
      *
@@ -269,7 +269,7 @@ public class Evaluate implements Serializable {
      *
      * @mbg.generated
      */
-    public Integer getStaffID() {
+    public String getStaffID() {
         return staffID;
     }
 
@@ -281,8 +281,8 @@ public class Evaluate implements Serializable {
      *
      * @mbg.generated
      */
-    public void setStaffID(Integer staffID) {
-        this.staffID = staffID;
+    public void setStaffID(String staffID) {
+        this.staffID = staffID == null ? null : staffID.trim();
     }
 
     /**

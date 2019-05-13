@@ -62,6 +62,12 @@
             <generatedKey column="FId" sqlStatement="SELECT @@IDENTITY" identity="true"/>
             <columnRenamingRule searchString="^F" replaceString="" />
         </table>
+
+        <table tableName="t_question" domainObjectName="Question" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="FId" sqlStatement="SELECT @@IDENTITY" identity="true"/>
+            <columnRenamingRule searchString="^F" replaceString="" />
+        </table>
         <!--<table tableName="t_RefundBill" domainObjectName="RefundBill" >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="FId" sqlStatement="SELECT @@IDENTITY" identity="true"/>
