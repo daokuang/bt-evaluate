@@ -97,4 +97,6 @@ public interface EvaluateMapper {
     Double averageScore(@Param("staffID") String staffID);
 
     Double averageTime(@Param("staffID") String staffID);
+
+    List<String> getLabels(@Param("staffID")String staffID);
 }

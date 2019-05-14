@@ -462,7 +462,7 @@
 
 
   <select id="averageScore" resultType="java.lang.Double" parameterType="map">
-    select round(AVG(a.FEvaluate),2)  from
+    select round(AVG(a.FEvaluate),1)  from
     (select * from t_evaluate
     where FStaffID = #{staffID,jdbcType=VARCHAR}
     and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= FCreateDate
@@ -471,12 +471,20 @@
   </select>
 
   <select id="averageTime" resultType="java.lang.Double" parameterType="map">
-  select round(AVG(a.FDuration),2)  from
+  select round(AVG(a.FDuration),1)  from
     (select * from t_evaluate
     where FStaffID = #{staffID,jdbcType=VARCHAR}
     and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= FCreateDate
     and FEvaluate is not null
     ) a
+  </select>
+  <select id="getLabels" resultType="java.lang.String" parameterType="map">
+    select l.FLabel from t_evaluate e inner join t_evaluate_label l on e.FID = l.FEvaluateID
+    where e.FStaffID = 1
+    and DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= e.FCreateDate
+    and e.FEvaluate is not null
+    and l.FLabel is not null
+    GROUP BY l.FLabel ORDER BY count(l.FLabel) desc;
   </select>
 
 </mapper>

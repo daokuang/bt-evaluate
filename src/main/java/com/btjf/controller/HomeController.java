@@ -1,18 +1,16 @@
 package com.btjf.controller;
 
 import com.btjf.application.util.XaResult;
-import com.btjf.model.User;
 import com.btjf.service.EvaluateServie;
-import com.btjf.service.UserServie;
 import com.btjf.vo.IndexInfoVo;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiParam;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -36,12 +34,26 @@ public class HomeController {
         if(windowNo == null){
             return XaResult.error("窗口号不能为空");
         }
-
         IndexInfoVo indexInfoVo = new IndexInfoVo();
 
         Double avgScore = evaluateServie.averageScore("");
         Double avgTime = evaluateServie.averageTime("");
-
+        List<String> labels = evaluateServie.getLabels("");
+        String duration = null;
+        if(avgTime != null && avgTime >0) {
+            double min = Math.floor(avgTime / 60);
+            duration = (int) min + ":" + (int) (avgTime % 60);
+        }
+        indexInfoVo.setScore((avgScore== null || avgScore <1)? "5": avgScore.toString());
+        indexInfoVo.setDuration(duration);
+        indexInfoVo.setLabels(labels);
+        indexInfoVo.setDept(null);
+        indexInfoVo.setImgs(null);
+        indexInfoVo.setNotice(null);
+        indexInfoVo.setName(null);
+        indexInfoVo.setPicture(null);
+        indexInfoVo.setWorkingYear(null);
+        indexInfoVo.setStaffID(null);
         return XaResult.success(indexInfoVo);
     }
 

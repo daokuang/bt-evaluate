@@ -24,9 +24,8 @@
 	<aop:aspectj-autoproxy/>
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<!-- @Controller, @Service, @Configuration, etc. -->
-	<context:component-scan base-package="com.btjf" >
+	<context:component-scan base-package="com.btjf.service,com.btjf.controller,com.btjf.mapper" >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="regex" expression="com.icar.finance.event.*" />
 	</context:component-scan>
 
  	<!-- json Docs start -->

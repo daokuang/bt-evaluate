@@ -92,13 +92,13 @@
 		</property>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:com/btjf/insurance/**/mapper/*.xml</value>
+				<value>classpath*:com/btjf/mapper/*.xml</value>
 			</list>
 		</property>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.btjf.insurance.**.mapper"/>
+		<property name="basePackage" value="com.btjf.mapper"/>
 		<property name="sqlSessionFactoryBeanName" value="mybatisSqlSessionFactory"/>
 	</bean>
 

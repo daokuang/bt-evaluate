@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yj on 2019/5/13.
@@ -85,5 +86,9 @@ public class EvaluateServie {
 
     public Double averageTime(String staffID) {
         return evaluateMapper.averageTime(staffID);
+    }
+
+    public List<String> getLabels(String staffID) {
+        return evaluateMapper.getLabels(staffID);
     }
 }
