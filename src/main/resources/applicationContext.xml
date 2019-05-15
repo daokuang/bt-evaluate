@@ -18,7 +18,7 @@
 
 	<description>Spring公共配置 </description>
 	<!--指定jdbc.properties的位置 -->
-	<context:property-placeholder location="classpath:db-pool.properties,classpath:jdbc.properties"/>
+	<context:property-placeholder location="classpath:db-pool.properties,classpath:jdbc.properties,classpath:evaluate.properties"/>
 
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<context:annotation-config />

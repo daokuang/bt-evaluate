@@ -113,6 +113,7 @@
 			<array>
 				<value>classpath*:/db-pool.properties</value>
 				<value>classpath*:/jdbc.properties</value>
+				<value>classpath*:/evaluate.properties</value>
 			</array>
 		</property>
 	</bean>

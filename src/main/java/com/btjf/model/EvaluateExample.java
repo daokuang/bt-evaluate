@@ -692,6 +692,76 @@ public class EvaluateExample {
             return (Criteria) this;
         }
 
+        public Criteria andCallCodeIsNull() {
+            addCriterion("FCallCode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeIsNotNull() {
+            addCriterion("FCallCode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeEqualTo(String value) {
+            addCriterion("FCallCode =", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeNotEqualTo(String value) {
+            addCriterion("FCallCode <>", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeGreaterThan(String value) {
+            addCriterion("FCallCode >", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("FCallCode >=", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeLessThan(String value) {
+            addCriterion("FCallCode <", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeLessThanOrEqualTo(String value) {
+            addCriterion("FCallCode <=", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeLike(String value) {
+            addCriterion("FCallCode like", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeNotLike(String value) {
+            addCriterion("FCallCode not like", value, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeIn(List<String> values) {
+            addCriterion("FCallCode in", values, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeNotIn(List<String> values) {
+            addCriterion("FCallCode not in", values, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeBetween(String value1, String value2) {
+            addCriterion("FCallCode between", value1, value2, "callCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeNotBetween(String value1, String value2) {
+            addCriterion("FCallCode not between", value1, value2, "callCode");
+            return (Criteria) this;
+        }
+
         public Criteria andCustNameIsNull() {
             addCriterion("FCustName is null");
             return (Criteria) this;
@@ -1414,6 +1484,11 @@ public class EvaluateExample {
 
         public Criteria andStaffNameLikeInsensitive(String value) {
             addCriterion("upper(FStaffName) like", value.toUpperCase(), "staffName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallCodeLikeInsensitive(String value) {
+            addCriterion("upper(FCallCode) like", value.toUpperCase(), "callCode");
             return (Criteria) this;
         }
 

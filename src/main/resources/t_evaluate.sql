@@ -7,6 +7,7 @@ CREATE TABLE `t_evaluate` (
   `FCenterId`  varchar(50) DEFAULT NULL,
   `FStaffID` varchar(20) DEFAULT NULL COMMENT '员工工号',
   `FStaffName` varchar(255) DEFAULT NULL COMMENT '员工姓名',
+  `FCallCode`  varchar(20) DEFAULT NULL COMMENT '叫号',
   `FCustName` varchar(255) DEFAULT NULL COMMENT '办事人员姓名',
   `FCustMobile` varchar(255) DEFAULT NULL COMMENT '办事人员手机号',
   `FItemID` int(11) DEFAULT NULL COMMENT '事项ID',

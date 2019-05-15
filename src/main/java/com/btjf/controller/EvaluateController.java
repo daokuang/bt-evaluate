@@ -1,9 +1,13 @@
 package com.btjf.controller;
 
 import com.btjf.application.util.XaResult;
+import com.btjf.common.utils.HttpClientUtil;
+import com.btjf.common.utils.JSONUtils;
 import com.btjf.model.Evaluate;
 import com.btjf.model.Question;
 import com.btjf.model.User;
+import com.btjf.response.PersonResponse;
+import com.btjf.response.UserResponse;
 import com.btjf.service.EvaluateServie;
 import com.btjf.service.QuestionServie;
 import com.btjf.service.UserServie;
@@ -12,6 +16,9 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiParam;
 import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +36,16 @@ import java.util.Random;
 @RequestMapping(value = "/api/evaluate/")
 @RestController("evaluateController")
 public class EvaluateController {
+    /** LOGGER */
+    private static final Logger LOGGER = LoggerFactory.getLogger(EvaluateController.class);
 
     @Resource
     private EvaluateServie evaluateServie;
     @Resource
     private QuestionServie questionServie;
+
+    @Value("call.persons.url")
+    private String persons_url;
     /**
      * 叫号
      *
@@ -58,6 +70,13 @@ public class EvaluateController {
             return XaResult.error("公务员部门不能为空");
         }
 
+        String result = HttpClientUtil.sendGetRequest(persons_url+ centerId +"/" + windowId);
+        if(StringUtils.isEmpty(result)){
+            return XaResult.error("获取窗口工作人员信息失败");
+        }
+        LOGGER.info("获取窗口工作人员信息!返回：" + result);
+        PersonResponse personResponse = JSONUtils.toBean(result, PersonResponse.class);
+
         Evaluate evaluate = new Evaluate();
         evaluate.setDeptID(null);
         evaluate.setDeptName(dept);
@@ -65,10 +84,13 @@ public class EvaluateController {
         evaluate.setCenterId(centerId);
         evaluate.setStaffID(staffID);
         evaluate.setStaffName(staffName);
-        evaluate.setCustName("");
-        evaluate.setCustMobile("");
-        evaluate.setItemID(null);
-        evaluate.setItemName("");
+        if(personResponse != null){
+            evaluate.setCustName(personResponse.getName());
+            evaluate.setCustMobile(personResponse.getTelphone());
+            evaluate.setItemID(null);
+            evaluate.setItemName(personResponse.getAffairName());
+            evaluate.setCallCode(personResponse.getCallCode());
+        }
         evaluate.setCreateDate(new Date());
         evaluate.setBeginTime(new Date());
 
