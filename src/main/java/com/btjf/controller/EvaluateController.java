@@ -167,12 +167,20 @@ public class EvaluateController {
      * @return
      */
     @RequestMapping(value = "/complete", method = RequestMethod.POST)
-    public XaResult<Integer> complete(@ApiParam("评价记录ID") Integer recordID) {
-        if(recordID == null){
-            return XaResult.error("评价记录ID不能为空");
+    public XaResult<Integer> complete(@ApiParam("中心号") String centerId,
+                                      @ApiParam("窗口号") String windowId,
+                                      @ApiParam("叫号") String callCode) {
+        if(StringUtils.isEmpty(windowId)){
+            return XaResult.error("窗口号不能为空");
+        }
+        if(StringUtils.isEmpty(centerId)){
+            return XaResult.error("中心号不能为空");
+        }
+        if(StringUtils.isEmpty(callCode)){
+            return XaResult.error("叫号不能为空");
         }
 
-        evaluateServie.complete(recordID);
+        evaluateServie.complete(centerId, windowId, callCode);
         return XaResult.success();
     }
 

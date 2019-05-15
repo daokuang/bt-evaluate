@@ -43,3 +43,12 @@ CREATE TABLE `t_question` (
 `FCreateTime`  datetime NULL ON UPDATE CURRENT_TIMESTAMP ,
 `FEnable`  int NULL COMMENT '1启用 2禁用' 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('大厅办事等候时间是否过长？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('导办服务是否热情？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('大厅环境是否舒适？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('到市民之家交通是否方便？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('停车是否方便？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('大厅内温暖是否舒适？', '2019-05-15 20:20:00', 1);
+INSERT INTO `t_question` (`FQuestion`, `FCreateTime`, `FEnable`) VALUES ('寻找办事窗口是否方便？', '2019-05-15 20:20:00', 1);
