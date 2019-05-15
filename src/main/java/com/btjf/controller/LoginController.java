@@ -20,6 +20,7 @@ import javax.annotation.Resource;
  * Created by Administrator on 2018/7/3 0003.
  */
 @Api(value = "LoginController", description = "登录", position = 1)
+@RequestMapping(value = "/api/evaluate/")
 @RestController("loginController")
 public class LoginController {
 

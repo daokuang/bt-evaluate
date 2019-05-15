@@ -412,63 +412,143 @@ public class EvaluateExample {
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoIsNull() {
-            addCriterion("FWindowNo is null");
+        public Criteria andCenterIdIsNull() {
+            addCriterion("FCenterId is null");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoIsNotNull() {
-            addCriterion("FWindowNo is not null");
+        public Criteria andCenterIdIsNotNull() {
+            addCriterion("FCenterId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoEqualTo(Integer value) {
-            addCriterion("FWindowNo =", value, "windowNo");
+        public Criteria andCenterIdEqualTo(String value) {
+            addCriterion("FCenterId =", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoNotEqualTo(Integer value) {
-            addCriterion("FWindowNo <>", value, "windowNo");
+        public Criteria andCenterIdNotEqualTo(String value) {
+            addCriterion("FCenterId <>", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoGreaterThan(Integer value) {
-            addCriterion("FWindowNo >", value, "windowNo");
+        public Criteria andCenterIdGreaterThan(String value) {
+            addCriterion("FCenterId >", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("FWindowNo >=", value, "windowNo");
+        public Criteria andCenterIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FCenterId >=", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoLessThan(Integer value) {
-            addCriterion("FWindowNo <", value, "windowNo");
+        public Criteria andCenterIdLessThan(String value) {
+            addCriterion("FCenterId <", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoLessThanOrEqualTo(Integer value) {
-            addCriterion("FWindowNo <=", value, "windowNo");
+        public Criteria andCenterIdLessThanOrEqualTo(String value) {
+            addCriterion("FCenterId <=", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoIn(List<Integer> values) {
-            addCriterion("FWindowNo in", values, "windowNo");
+        public Criteria andCenterIdLike(String value) {
+            addCriterion("FCenterId like", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoNotIn(List<Integer> values) {
-            addCriterion("FWindowNo not in", values, "windowNo");
+        public Criteria andCenterIdNotLike(String value) {
+            addCriterion("FCenterId not like", value, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoBetween(Integer value1, Integer value2) {
-            addCriterion("FWindowNo between", value1, value2, "windowNo");
+        public Criteria andCenterIdIn(List<String> values) {
+            addCriterion("FCenterId in", values, "centerId");
             return (Criteria) this;
         }
 
-        public Criteria andWindowNoNotBetween(Integer value1, Integer value2) {
-            addCriterion("FWindowNo not between", value1, value2, "windowNo");
+        public Criteria andCenterIdNotIn(List<String> values) {
+            addCriterion("FCenterId not in", values, "centerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCenterIdBetween(String value1, String value2) {
+            addCriterion("FCenterId between", value1, value2, "centerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCenterIdNotBetween(String value1, String value2) {
+            addCriterion("FCenterId not between", value1, value2, "centerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdIsNull() {
+            addCriterion("FWindowId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdIsNotNull() {
+            addCriterion("FWindowId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdEqualTo(String value) {
+            addCriterion("FWindowId =", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdNotEqualTo(String value) {
+            addCriterion("FWindowId <>", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdGreaterThan(String value) {
+            addCriterion("FWindowId >", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FWindowId >=", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdLessThan(String value) {
+            addCriterion("FWindowId <", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdLessThanOrEqualTo(String value) {
+            addCriterion("FWindowId <=", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdLike(String value) {
+            addCriterion("FWindowId like", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdNotLike(String value) {
+            addCriterion("FWindowId not like", value, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdIn(List<String> values) {
+            addCriterion("FWindowId in", values, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdNotIn(List<String> values) {
+            addCriterion("FWindowId not in", values, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdBetween(String value1, String value2) {
+            addCriterion("FWindowId between", value1, value2, "windowId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdNotBetween(String value1, String value2) {
+            addCriterion("FWindowId not between", value1, value2, "windowId");
             return (Criteria) this;
         }
 
@@ -1314,6 +1394,16 @@ public class EvaluateExample {
 
         public Criteria andDeptNameLikeInsensitive(String value) {
             addCriterion("upper(FDeptName) like", value.toUpperCase(), "deptName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCenterIdLikeInsensitive(String value) {
+            addCriterion("upper(FCenterId) like", value.toUpperCase(), "centerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWindowIdLikeInsensitive(String value) {
+            addCriterion("upper(FWindowId) like", value.toUpperCase(), "windowId");
             return (Criteria) this;
         }
 

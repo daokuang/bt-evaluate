@@ -26,7 +26,7 @@ import java.util.Random;
  * Created by Administrator on 2018/7/3 0003.
  */
 @Api(value = "EvaluateController", description = "评价", position = 1)
-@RequestMapping(value = "/evaluate/")
+@RequestMapping(value = "/api/evaluate/")
 @RestController("evaluateController")
 public class EvaluateController {
 
@@ -40,12 +40,16 @@ public class EvaluateController {
      * @return
      */
     @RequestMapping(value = "/call", method = RequestMethod.POST)
-    public XaResult<Integer> call(@ApiParam("窗口号") Integer windowNo,
+    public XaResult<Integer> call(@ApiParam("中心号") String centerId,
+                                  @ApiParam("窗口号") String windowId,
                                     @ApiParam("公务员姓名") String staffName,
                                    @ApiParam("公务员工号") String staffID,
                                     @ApiParam("公务员部门") String dept) {
-        if(windowNo == null){
+        if(StringUtils.isEmpty(windowId)){
             return XaResult.error("窗口号不能为空");
+        }
+        if(StringUtils.isEmpty(centerId)){
+            return XaResult.error("中心号不能为空");
         }
         if(StringUtils.isEmpty(staffName)){
             return XaResult.error("公务员姓名不能为空");
@@ -57,7 +61,8 @@ public class EvaluateController {
         Evaluate evaluate = new Evaluate();
         evaluate.setDeptID(null);
         evaluate.setDeptName(dept);
-        evaluate.setWindowNo(windowNo);
+        evaluate.setWindowId(windowId);
+        evaluate.setCenterId(centerId);
         evaluate.setStaffID(staffID);
         evaluate.setStaffName(staffName);
         evaluate.setCustName("");
@@ -98,14 +103,19 @@ public class EvaluateController {
      */
     @RequestMapping(value = "/star", method = RequestMethod.POST)
     public XaResult<Integer> star(@ApiParam("评价记录ID") Integer recordID,
-                                    @ApiParam("1 非常不满意 2不满意 3基本满意 4满意 5非常满意") Integer star) {
+                                    @ApiParam("1 非常不满意 2不满意 3基本满意 4满意 5非常满意") Integer star,
+                                  @ApiParam("标签组") String[] labels) {
         if(recordID == null){
             return XaResult.error("评价记录ID不能为空");
         }
         if(star == null){
             return XaResult.error("星级不能为空");
         }
+        if(labels ==null || labels.length < 1){
+            return XaResult.error("标签组不能为空");
+        }
 
+        evaluateServie.label(recordID, labels);
         evaluateServie.star(recordID, star);
         return XaResult.success();
     }
