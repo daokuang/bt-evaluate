@@ -54,20 +54,24 @@ public class EvaluateController {
     @RequestMapping(value = "/call", method = RequestMethod.POST)
     public XaResult<Integer> call(@ApiParam("中心号") String centerId,
                                   @ApiParam("窗口号") String windowId,
-                                    @ApiParam("公务员姓名") String staffName,
-                                   @ApiParam("公务员工号") String staffID,
-                                    @ApiParam("公务员部门") String dept) {
+                                    @ApiParam("公务员用户名") String username,
+                                   @ApiParam("公务员身份证") String idCard,
+                                    @ApiParam("叫号") String callCode,
+                                  @ApiParam("办事人姓名") String name,
+                                  @ApiParam("办事人手机号") String telphone,
+                                  @ApiParam("办事事项") String affairName
+                                  ) {
         if(StringUtils.isEmpty(windowId)){
             return XaResult.error("窗口号不能为空");
         }
         if(StringUtils.isEmpty(centerId)){
             return XaResult.error("中心号不能为空");
         }
-        if(StringUtils.isEmpty(staffName)){
-            return XaResult.error("公务员姓名不能为空");
+        if(StringUtils.isEmpty(idCard)){
+            return XaResult.error("公务员身份证不能为空");
         }
-        if(StringUtils.isEmpty(dept)){
-            return XaResult.error("公务员部门不能为空");
+        if(StringUtils.isEmpty(callCode)){
+            return XaResult.error("叫号不能为空");
         }
 
         String result = HttpClientUtil.sendGetRequest(persons_url+ centerId +"/" + windowId);
@@ -79,11 +83,11 @@ public class EvaluateController {
 
         Evaluate evaluate = new Evaluate();
         evaluate.setDeptID(null);
-        evaluate.setDeptName(dept);
+        evaluate.setDeptName("");
         evaluate.setWindowId(windowId);
         evaluate.setCenterId(centerId);
-        evaluate.setStaffID(staffID);
-        evaluate.setStaffName(staffName);
+        evaluate.setStaffID("");
+        evaluate.setStaffName("");
         if(personResponse != null){
             evaluate.setCustName(personResponse.getName());
             evaluate.setCustMobile(personResponse.getTelphone());
@@ -95,7 +99,9 @@ public class EvaluateController {
         evaluate.setBeginTime(new Date());
 
         evaluateServie.save(evaluate);
-        return XaResult.success(evaluate.getID());
+        //TODO 传递给前端
+        evaluate.getID();
+        return XaResult.success();
     }
 
 
@@ -181,6 +187,7 @@ public class EvaluateController {
         }
 
         evaluateServie.complete(centerId, windowId, callCode);
+        //TODO 传递给前端
         return XaResult.success();
     }
 

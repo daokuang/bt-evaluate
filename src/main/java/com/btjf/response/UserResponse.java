@@ -8,15 +8,15 @@ import java.io.Serializable;
 public class UserResponse implements Serializable{
     private static final long serialVersionUID = 3401295192087222757L;
 
-    private String usernae;
+    private String username;
     private String idCard;
 
-    public String getUsernae() {
-        return usernae;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsernae(String usernae) {
-        this.usernae = usernae;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getIdCard() {
