@@ -4,6 +4,9 @@ import com.btjf.common.page.Page;
 import com.btjf.mapper.EvaluateLabelMapper;
 import com.btjf.mapper.EvaluateMapper;
 import com.btjf.model.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -136,8 +139,62 @@ public class EvaluateServie {
 
     public Page search(Page page, String beginDate, String endDate, String beginTime, String endTime,
                        String deptName, String staffName, String windowId, String custName, String custMobile,
-                       String itemName, String question, String answer, String evaluate) {
-
-        return null;
+                       String itemName, String question, Integer answer, Integer evaluate) {
+        PageHelper.startPage(page.getPage(), page.getRp());//mybatis默认分页从1开始
+        EvaluateExample evaluateExample = new EvaluateExample();
+        EvaluateExample.Criteria criteria = evaluateExample.createCriteria();
+        if(StringUtils.isNotEmpty(windowId)) {
+            criteria.andWindowIdEqualTo(windowId);
+        }
+        if(StringUtils.isNotEmpty(deptName)) {
+            criteria.andDeptNameEqualTo(deptName);
+        }
+        if(StringUtils.isNotEmpty(staffName)) {
+            criteria.andStaffNameLike("%" +staffName + "%");
+        }
+        if(StringUtils.isNotEmpty(custName)) {
+            criteria.andCustNameLike("%" +custName + "%");
+        }
+        if(StringUtils.isNotEmpty(custMobile)) {
+            criteria.andCustMobileLike("%" +custMobile + "%");
+        }
+        if(StringUtils.isNotEmpty(itemName)) {
+            criteria.andItemNameEqualTo(itemName);
+        }
+        if(StringUtils.isNotEmpty(question)) {
+            criteria.andQuestionEqualTo(question);
+        }
+        if(answer != null) {
+            criteria.andAnswerEqualTo(answer);
+        }
+        if(evaluate != null) {
+            criteria.andEvaluateEqualTo(evaluate);
+        }
+        SimpleDateFormat sp=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat spt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            if(StringUtils.isNotEmpty(beginDate)){
+                Date date = sp.parse(beginDate);
+                criteria.andCreateDateGreaterThanOrEqualTo(date);
+            }
+            if(StringUtils.isNotEmpty(endDate)){
+                Date date = sp.parse(endDate);
+                criteria.andCreateDateLessThanOrEqualTo(date);
+            }
+            if(StringUtils.isNotEmpty(beginTime)){
+                Date date = spt.parse(beginTime);
+                criteria.andBeginTimeGreaterThanOrEqualTo(date);
+            }
+            if(StringUtils.isNotEmpty(endTime)){
+                Date date = spt.parse(endTime);
+                criteria.andEndTimeLessThanOrEqualTo(date);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        evaluateExample.setOrderByClause("FID desc");
+        List<Evaluate> list = evaluateMapper.selectByExample(evaluateExample);
+        PageInfo<Evaluate> pageInfo = new PageInfo<>(list);
+        return new Page(pageInfo);
     }
 }

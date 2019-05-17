@@ -34,7 +34,7 @@ public class IndexInfoVo  implements Serializable {
     private String duration;
 
     @ApiModelProperty(value="公告")
-    private String notice;
+    private List<String> notice;
 
     @ApiModelProperty(value="轮播图列表")
     private List<String> imgs;
@@ -98,11 +98,11 @@ public class IndexInfoVo  implements Serializable {
         this.duration = duration;
     }
 
-    public String getNotice() {
+    public List<String> getNotice() {
         return notice;
     }
 
-    public void setNotice(String notice) {
+    public void setNotice(List<String> notice) {
         this.notice = notice;
     }
 

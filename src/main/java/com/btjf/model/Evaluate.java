@@ -128,6 +128,7 @@ public class Evaluate implements Serializable {
      *
      * @mbg.generated
      */
+
     private Date beginTime;
 
     /**

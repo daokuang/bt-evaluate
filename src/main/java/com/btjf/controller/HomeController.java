@@ -70,7 +70,7 @@ public class HomeController {
 //        UserResponse userResponse = JSONUtils.toBean(result, UserResponse.class);
         //TODO 留待以后完善工作人员信息
 
-        indexInfoVo.setScore((avgScore== null || avgScore <1)? "5": avgScore.toString());
+        indexInfoVo.setScore((avgScore== null || avgScore <1)? "5.0": avgScore.toString());
         indexInfoVo.setDuration(duration);
         indexInfoVo.setLabels(labels);
 
