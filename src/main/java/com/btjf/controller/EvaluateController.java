@@ -44,7 +44,7 @@ public class EvaluateController {
     @Resource
     private QuestionServie questionServie;
 
-    @Value("call.persons.url")
+    @Value("${call.persons.url}")
     private String persons_url;
     /**
      * 叫号
@@ -74,12 +74,12 @@ public class EvaluateController {
             return XaResult.error("叫号不能为空");
         }
 
-        String result = HttpClientUtil.sendGetRequest(persons_url+ centerId +"/" + windowId);
-        if(StringUtils.isEmpty(result)){
-            return XaResult.error("获取窗口工作人员信息失败");
-        }
-        LOGGER.info("获取窗口工作人员信息!返回：" + result);
-        PersonResponse personResponse = JSONUtils.toBean(result, PersonResponse.class);
+//        String result = HttpClientUtil.sendGetRequest(persons_url+ centerId +"/" + windowId);
+//        if(StringUtils.isEmpty(result)){
+//            return XaResult.error("获取窗口工作人员信息失败");
+//        }
+//        LOGGER.info("获取窗口工作人员信息!返回：" + result);
+//        PersonResponse personResponse = JSONUtils.toBean(result, PersonResponse.class);
 
         Evaluate evaluate = new Evaluate();
         evaluate.setDeptID(null);
@@ -88,13 +88,13 @@ public class EvaluateController {
         evaluate.setCenterId(centerId);
         evaluate.setStaffID("");
         evaluate.setStaffName("");
-        if(personResponse != null){
-            evaluate.setCustName(personResponse.getName());
-            evaluate.setCustMobile(personResponse.getTelphone());
+//        if(personResponse != null){
+            evaluate.setCustName(name);
+            evaluate.setCustMobile(telphone);
             evaluate.setItemID(null);
-            evaluate.setItemName(personResponse.getAffairName());
-            evaluate.setCallCode(personResponse.getCallCode());
-        }
+            evaluate.setItemName(affairName);
+            evaluate.setCallCode(callCode);
+ //       }
         evaluate.setCreateDate(new Date());
         evaluate.setBeginTime(new Date());
 

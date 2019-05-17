@@ -4,7 +4,6 @@ import com.btjf.application.util.XaResult;
 import com.btjf.file.domain.FileRecordDomain;
 import com.btjf.model.User;
 import com.btjf.service.UserServie;
-import com.btjf.vo.PlanVo;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
