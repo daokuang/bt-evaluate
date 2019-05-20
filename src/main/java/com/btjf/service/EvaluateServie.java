@@ -141,6 +141,15 @@ public class EvaluateServie {
                        String deptName, String staffName, String windowId, String custName, String custMobile,
                        String itemName, String question, Integer answer, Integer evaluate) {
         PageHelper.startPage(page.getPage(), page.getRp());//mybatis默认分页从1开始
+        List<Evaluate> list = findListForExcel(beginDate, endDate, beginTime, endTime, deptName, staffName,
+                windowId, custName, custMobile, itemName, question, answer, evaluate);
+        PageInfo<Evaluate> pageInfo = new PageInfo<>(list);
+        return new Page(pageInfo);
+    }
+
+    public List<Evaluate> findListForExcel(String beginDate, String endDate, String beginTime, String endTime, String deptName,
+                                           String staffName, String windowId, String custName, String custMobile, String itemName,
+                                           String question, Integer answer, Integer evaluate) {
         EvaluateExample evaluateExample = new EvaluateExample();
         EvaluateExample.Criteria criteria = evaluateExample.createCriteria();
         if(StringUtils.isNotEmpty(windowId)) {
@@ -194,7 +203,6 @@ public class EvaluateServie {
         }
         evaluateExample.setOrderByClause("FID desc");
         List<Evaluate> list = evaluateMapper.selectByExample(evaluateExample);
-        PageInfo<Evaluate> pageInfo = new PageInfo<>(list);
-        return new Page(pageInfo);
+        return list;
     }
 }

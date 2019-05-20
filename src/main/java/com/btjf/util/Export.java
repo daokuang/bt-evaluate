@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by yj on 2019/5/17.
@@ -22,7 +23,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Export {
 
 
-    public static void createExcel(List<EvaluateVo> list){
+
+    public static void createExcel(List<EvaluateVo> list, String path){
         FileOutputStream fos=null;
         Workbook workbook=new XSSFWorkbook();
         Sheet sheet=workbook.createSheet("评价统计");
@@ -96,7 +98,7 @@ public class Export {
         }
         try {
             //导出数据库文件保存路径
-            fos=new FileOutputStream("../file/export.xlsx");
+            fos=new FileOutputStream(path + System.currentTimeMillis() + ".xlsx");
       /*if(fos.toString().endsWith("xlsx")){
         workbook=new XSSFWorkbook();
       }else if(fos.toString().endsWith("xls")){

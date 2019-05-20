@@ -14,6 +14,7 @@ import com.heige.aikajinrong.base.util.BeanUtils;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,9 @@ public class BackgroundController {
 
     @Resource
     private EvaluateServie evaluateServie;
+
+    @Value("#{excel.path}")
+    private String path;
 
     /**
      * 搜索
@@ -92,11 +96,12 @@ public class BackgroundController {
                                              @ApiParam("评价结果") Integer answer,
                                              @ApiParam("星级") Integer evaluate
     ) {
-        Page page = new Page(50, 1);
-
-        page = evaluateServie.search(page,beginDate,endDate,beginTime,endTime,deptName,staffName,windowId,custName,custMobile,itemName,question,answer,evaluate);
-        List<EvaluateVo> list = BeanUtils.convertList(page.getRows(), EvaluateVo.class);
-        Export.createExcel(list);
+        if(StringUtils.isEmpty(beginTime) && StringUtils.isEmpty(endTime)){
+            return XaResult.error("请选择开始时间和结束时间");
+        }
+        List<Evaluate> bos  = evaluateServie.findListForExcel(beginDate,endDate,beginTime,endTime,deptName,staffName,windowId,custName,custMobile,itemName,question,answer,evaluate);
+        List<EvaluateVo> list = BeanUtils.convertList(bos, EvaluateVo.class);
+        Export.createExcel(list, path);
         return XaResult.success();
     }
 
