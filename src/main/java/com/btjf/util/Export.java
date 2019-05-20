@@ -2,20 +2,14 @@ package com.btjf.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.btjf.vo.EvaluateVo;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by yj on 2019/5/17.
@@ -23,8 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class Export {
 
 
-
-    public static void createExcel(List<EvaluateVo> list, String path){
+    public static String createExcel(List<EvaluateVo> list, String path){
         FileOutputStream fos=null;
         Workbook workbook=new XSSFWorkbook();
         Sheet sheet=workbook.createSheet("评价统计");
@@ -96,9 +89,11 @@ public class Export {
             sheet.setColumnWidth((short)0, (short)10000);
             j++;
         }
+        String filename = System.currentTimeMillis() + ".xlsx";
         try {
+
             //导出数据库文件保存路径
-            fos=new FileOutputStream(path + System.currentTimeMillis() + ".xlsx");
+            fos=new FileOutputStream(path + filename);
       /*if(fos.toString().endsWith("xlsx")){
         workbook=new XSSFWorkbook();
       }else if(fos.toString().endsWith("xls")){
@@ -107,11 +102,13 @@ public class Export {
             //将工作簿写入文件
             workbook.write(fos);
             System.out.println("导出文件成功");
+            return filename;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             System.out.println("导出文件失败");
         }
+        return null;
     }
 //    public static void main(String[] args) throws Exception {
 //        //连接数据库

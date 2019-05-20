@@ -37,6 +37,9 @@ public class BackgroundController {
     @Value("#{excel.path}")
     private String path;
 
+    @Value("#{excel.url}")
+    private String url;
+
     /**
      * 搜索
      *
@@ -101,8 +104,8 @@ public class BackgroundController {
         }
         List<Evaluate> bos  = evaluateServie.findListForExcel(beginDate,endDate,beginTime,endTime,deptName,staffName,windowId,custName,custMobile,itemName,question,answer,evaluate);
         List<EvaluateVo> list = BeanUtils.convertList(bos, EvaluateVo.class);
-        Export.createExcel(list, path);
-        return XaResult.success();
+        String filename = Export.createExcel(list, path);
+        return XaResult.success(url + filename);
     }
 
 
