@@ -105,6 +105,9 @@ public class BackgroundController {
         List<Evaluate> bos  = evaluateServie.findListForExcel(beginDate,endDate,beginTime,endTime,deptName,staffName,windowId,custName,custMobile,itemName,question,answer,evaluate);
         List<EvaluateVo> list = BeanUtils.convertList(bos, EvaluateVo.class);
         String filename = Export.createExcel(list, path);
+        if(StringUtils.isEmpty(filename)){
+            return XaResult.error("生成Excel出错");
+        }
         return XaResult.success(url + filename);
     }
 
